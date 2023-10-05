@@ -1,0 +1,78 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Jogo de Vestir a Barbie</title>
+ <style>
+ body {
+   font-family: Arial, sans-serif;
+ }
+
+ h1 {
+   text-align: center;
+ }
+
+ #barbie {
+   width: 500px;
+   height: 500px;
+   margin: 0 auto;
+ }
+
+ #barbie img {
+   width: 100%;
+   height: 100%;
+ }
+
+ #roupas {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+ }
+
+ #roupas ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+ }
+
+ #roupas ul li {
+   display: inline-block;
+   margin: 0 10px;
+ }
+
+ #roupas ul li a {
+   text-decoration: none;
+   color: black;
+ }
+ </style>
+</head>
+<body>
+ <h1>Jogo de Vestir a Barbie</h1>
+ <div id="barbie">
+    <img src="barbie.png">
+    <div id="roupas">
+      <ul>
+        <li><a href="#">Vestido</a></li>
+        <li><a href="#">Saia</a></li>
+        <li><a href="#">Blusa</a></li>
+        <li><a href="#">Calça</a></li>
+        <li><a href="#">Sapatos</a></li>
+        <li><a href="#">Acessórios</a></li>
+      </ul>
+    </div>
+ </div>
+
+ <script>
+ const roupas = document.getElementById('roupas');
+const barbie = document.getElementById('barbie');
+roupas.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
+    const roupa = e.target.innerHTML;
+    barbie.innerHTML = `<img src="${roupa}.png">`;
+  }
+});
+ </script>
+</body>
+</html>
