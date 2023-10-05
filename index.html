@@ -8,7 +8,7 @@ html
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  css
+  <style>
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -54,8 +54,68 @@ body {
 .carta.erro {
     background-color: #f00;
 }
+</style>
     <h1>Jogo da Memória da Série "Hey Jesse"</h1>
     <div id="memoria"></div>
-    <script src="script.js"></script>
+    <script >
+      const cartas = [
+  'barbie.png',
+  'barbie.png',
+  'jessie.png',
+  'jessie.png',
+  'zeke.png',
+  'zeke.png',
+  'skunk.png',
+  'skunk.png',
+  'punky.png',
+  'punky.png',
+  'elmo.png',
+  'elmo.png',
+  'cookie.png',
+  'cookie.png',
+];
+let cartasViradas = [];
+let cartasAcertadas = [];
+function embaralharCartas() {
+  cartas.sort(() => Math.random() - 0.5);
+}
+function criarCarta(carta) {
+  const cartaElement = document.createElement('div');
+  cartaElement.classList.add('carta');
+  cartaElement.innerHTML = `
+    <img src="${carta}" alt="${carta}">
+  `;
+  cartaElement.addEventListener('click', () => {
+    cartaElement.classList.add('virada');
+    cartasViradas.push(carta);
+    if (cartasViradas.length === 2) {
+      if (cartasViradas[0] === cartasViradas[1]) {
+        cartasAcertadas.push(...cartasViradas);
+        cartasViradas = [];
+        if (cartasAcertadas.length === cartas.length) {
+          alert('Você venceu!');
+        }
+      } else {
+        setTimeout(() => {
+          cartasViradas.forEach((carta) => {
+            document.querySelector(`.carta[src="${carta}"]`).classList.remove('virada');
+          });
+          cartasViradas = [];
+        }, 1000);
+      }
+    }
+  });
+  return cartaElement;
+}
+function iniciarJogo() {
+  embaralharCartas();
+  const memoria = document.getElementById('memoria');
+  memoria.innerHTML = '';
+  cartas.forEach((carta) => {
+    memoria.appendChild(criarCarta(carta));
+  });
+}
+iniciarJogo();
+    </script>
 </body>
 </html>
